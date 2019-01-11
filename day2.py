@@ -35,3 +35,17 @@ def intersection(nums1, nums2):
         if num_1 not in output:
           output.append(num_1)
   return output
+
+ # REFACTORED
+  '''
+    d1 = {}
+        d2 = {}
+        for n1 in nums1:
+            d1[n1] = 0
+        
+        for n2 in nums2:
+            if n2 in d1:
+                d2[n2] = 0
+        
+        return d2.keys()
+  '''
