@@ -130,5 +130,3 @@ def sort_scores(unsorted_scores, highest_possible_score):
             
     return sorted_array
 
-
-print(sort_scores([37, 89, 41, 65, 91, 53], 100))
