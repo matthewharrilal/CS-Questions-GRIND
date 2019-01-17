@@ -244,3 +244,7 @@ def findContentChildren( g, s):
         checking the whole array to find a cookie size to satisdy a greedier kid and vice versa'''
 
         # BOIL IT DOWN TO ITS MOST BASIC TRUTHS
+
+        # WHAT ABOUT THIS PROBLEM IS GREEDY BECAUSE IS THERE A TREND IN THE SOLUTIONS THAT WILL HELP ME DYNAMIC GREEDY APPROACHES FOR DIFFERENT PROBLEMS
+
+    
