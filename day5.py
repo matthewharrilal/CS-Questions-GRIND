@@ -77,3 +77,47 @@ def lemonadeChange(bills):
   # How do we check for the different variations in bills that can be returned?
 
 print(lemonadeChange([5,5,5,10,20]))
+
+
+def lemonadeChange(self, bills):
+
+        # ADDINFG DYNAMICNESS TO FINAL SOLUTION SEEMS TO BE A BIT CHALLENGING DIFFERENT LOGIC INVOLVED REGARDING FINDING DIFFERENT VARIATIONS OF CHANGE THAT CAN BE GIVEN AND CHERCKED FOR
+        
+        """
+        :type bills: List[int]
+        :rtype: bool
+        """
+
+        # KEEPS TRACK OF HOW MANY 5'S AND 10'S YOU HAVE
+        5_dollar_freq = 0
+        10_dollar_freq = 0
+
+
+        for i in range(len(bills)): # Iterate through given bills from customers
+
+            if bills[i] == 5: # IF CUSTOMER GIVES YOU 5 COLLECT IT NO CHANGE GIVEN LEMONADE COST AT 5 DOLLARS CUSTOMERS ONLY BUY ONE
+                5_dollar_freq += 1 # increment your five dollar frequency
+
+            elif bills[i] == 10: # IF CUSTOMER GIVES YUO 10 DOLLARS
+                if 1 > 5_dollar_freq: # IF YOU HAVE 1 OR MORE 5 DOLLAR BILLS
+
+                    return False  # IF NOT RETURN FALSE BECAUSE WE HAVE NO CHANGE FOR HIM in the form they need
+                else:
+                    10_dollar_freq, 5_dollar_freq = 10_dollar_freq +1 , 5_dollar_freq -1 # INCREASE THE THE FREQUENCY OF THE BILL YOU COLLECTED(10) AND DECREMENT THE FREQUENCY OF THE BILL YOU GAVE AWAY(5)
+
+            elif 10_dollar_freq > 0: # IF THE BILL IS NOT A 5 OR 10 ITS A 20 AND YOU KNOW THAT BECAUSE 20 IS THE ONLY OTHER BILL
+                # THEREFORE CHECK THE FREQUENCY OF YOUR BIGGER BILLS FIRST BECAUSE YOU WANT TO GET RID OF THE BIGGER BILLS FIRST
+                # THIS ELIF STATEMENT CONFIRMS TWO THINGS WE ARE CURRENTLY ON A 20 DOLLAR BILL AND THAT HAVE WE 1 OR MORE 10 DOLLAR BILLS
+
+                if 5_dollar_freq >0: # CHECK FIRST IF YOU HAVE 5 DOLLAR BILLS
+                    5_dollar_freq, 10_dollar_freq = 5_dollar_freq-1, 10_dollar_freq-1 # THEREFORE WE GIVE A 10 DOLLAR BILL AND A 5 DOLLAR BILL AWAY BY DECREMENTING IT AND THIS ACCOUNTS FOR ONE VARIATION OF POSSIBLE CHANGE GIVEN!!!!
+                else:
+                    return False
+
+            else:
+                if 5_dollar_freq < 3: # IF THE FIRST DESIRED VARIATION DOESNT WORK THEN SEE IF YOU CAN GIVE 3 FIVE DOLLARS AWAY 
+                    return False
+                else:
+                    5_dollar_freq -= 3
+
+        return True
