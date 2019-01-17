@@ -38,7 +38,6 @@ def lengthOfLongestSubstring(self, s):
             index += 1
         
 
-
 def lengthOfLongestSubstring(s):
   """
   :type s: str
@@ -47,36 +46,42 @@ def lengthOfLongestSubstring(s):
   unique_char = set()
   backtracing_index = 0  # Set to current index and works backward when iterating
   current_index = 0
-  done_rewinding = False
   counter = 0
-  output = []
+  max_sequence_length = 0
                   
-  while current_index < len(s):
+  while current_index < len(s): # Need to iterate through the elements
 
-      current_letter = s[current_index]
-      if current_letter not in unique_char:
-          unique_char.add(current_letter)
-          counter += 1
+      current_letter = s[current_index] # Find the current letter
+
+      if current_letter not in unique_char: # Check if letter has been found in the sequence
+
+          unique_char.add(current_letter) # If not then add the letter to increase the sequence
+          counter += 1 # Keeping track of sequence length
 
       # Meaning we found a repeating element
       else: 
 
-          output.append(counter)
-          print(unique_char)
-          unique_char.clear()
-          counter = 0
-          backtracing_index = current_index
+          if counter > max_sequence_length:
+            max_sequence_length = counter
 
-          while not done_rewinding:
+          unique_char.clear() # Clear the sequence held in the set because we found a duplicate
 
-            backtracing_index -= 1
-            if s[backtracing_index] == current_letter:
-              done_rewinding = True
-              current_index = backtracing_index
+          counter = 0 # Reset the counter to keep track of the length of the next sequence
 
-      current_index += 1
+          backtracing_index = current_index # Set the index to iterate back to find the previous occurence of the repeated element, why?
 
-  return max(output)
+          # DO WE EVEN NEED THE FLAG?
+          while backtracing_index >= 0: # keeping track of when we are done backtracing to find the previous occurence of the last repeated element
+
+            backtracing_index -= 1 # Backtrace
+            if s[backtracing_index] == current_letter: # Check if the letter we are currently on while backtracing is the repeated element we encountered
+
+              current_index = backtracing_index # Then set the current index to be the index after the previous occurence of the repeated element
+              break
+
+      current_index += 1 # Incremented here for the next iteration
+
+  return max_sequence_length
 
     
-print(lengthOfLongestSubstring("ABDEFGABEF"))
+print(lengthOfLongestSubstring("pwwkew"))
