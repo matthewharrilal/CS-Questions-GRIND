@@ -172,3 +172,40 @@ def lemonadeChange(bills):
   # How do we check for the different variations in bills that can be returned?
 
 print(lemonadeChange([5,5,5,10,20]))
+
+
+
+def findContentChildren(g, s):
+  """
+  :type g: List[int]
+  :type s: List[int]
+  :rtype: int
+  """
+  # LENGTH = NUMBER OF STUDENTS
+  # ELEMENTS IN ARRAY REPRESENTS CURRENT STUDENTS GREED FACTOR
+  # SECOND_ARR_LEN = NUMBER OF COOKIES
+  # ELEMENTS IN SEC ARRAY = COOKIE SIZE
+  # GREED FACTOR IS COMPLETED BY CONTENT ZISE
+  
+  # DO WE ACTUALLY CARE ABOUT THE STUDENT AS IN THEIR POSITION IN ARRAY JUST ABOUT THEIR GREED FACTOR
+  
+  greed_freq = {}
+  content_students = 0
+  
+  for greed_factor in g:
+      if greed_factor not in greed_freq:
+          greed_freq[greed_factor] = 1
+      else:
+          greed_freq[greed_factor] += 1
+          
+  # WE NOW HAVE A GREED FACTOR FREQUENCY NOW WHAT WE NOW DECREMENT FROM THE FREQUENCY OF GREED AS WE ITERATE THROUGH COOKIE SIZES AND SEE WHO WE CAN MAKE CONTENT
+  
+  for cookie_size in s:
+      if cookie_size in greed_freq:
+          if greed_freq[cookie_size] > 0:
+            content_students += 1
+            greed_freq[cookie_size] -= 1
+          
+  return content_students
+
+print(findContentChildren([1,2,2], [2,3]))
