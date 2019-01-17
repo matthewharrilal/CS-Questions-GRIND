@@ -15,3 +15,18 @@ def largest_sum_consecutive_array(arr):
 
 
 print(largest_sum_consecutive_array([-2, -3, 4, -1, -2, 1, 5, -3]))
+
+
+import collections
+def findTheDifference(s, t):
+  """
+  :type s: str
+  :type t: str
+  :rtype: str
+  """
+  ss = collections.Counter(s)
+  tt = collections.Counter(t)
+  print(tt,ss)
+  res = tt-ss
+  return res.keys()[0]
+print(findTheDifference(s = "abcd",t = "abcde"))
