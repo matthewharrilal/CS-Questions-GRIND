@@ -121,3 +121,54 @@ def lemonadeChange(self, bills):
                     5_dollar_freq -= 3
 
         return True
+
+
+
+# CLOSEST DYNAMICE ATTEMPT OF MINE AT LEMONADE CHANGE
+def lemonadeChange(bills):
+  """
+  :type bills: List[int]
+  :rtype: bool
+  """
+
+  # EVERYONE BUYS OONLY ONE LEMONADE
+
+  bill_freq = {} # Frequency of the bills
+  lemonade_price = 5 # Cost of 1 lemonade
+  difference_left = 0
+  
+  for bill in bills:
+    profit = (bill - lemonade_price)
+    if lemonade_price == bill:
+      if bill not in bill_freq:
+
+        bill_freq[bill] = 1
+
+      else:
+        bill_freq[bill] += 1
+    
+    else:
+      if bill in bill_freq:
+        bill_freq[bill] += 1
+      else:
+        bill_freq[bill] = 1
+      # PROFIT == BILL WE ARE DECREMENTING FREQ FROM
+      if profit in bill_freq:
+        bill_freq[profit] -= 1
+      elif profit not in bill_freq: # Either means we dont have correct change or that we need a variation of change
+
+      # it all comes down to if we have the correct change 
+        bill_freq[bill] = "NO CHANGE LEFT"
+
+  # So whats the current situation we are able to collect the bills and hand out change and decrement when we do so. The problem now is though that we dont have a method to give a varaition of change for the highest bill =20$ next challenege think how to make the cap any factor of 5
+
+  # If bill
+   
+
+  return bill_freq
+
+
+
+  # How do we check for the different variations in bills that can be returned?
+
+print(lemonadeChange([5,5,5,10,20]))
