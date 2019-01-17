@@ -209,3 +209,38 @@ def findContentChildren(g, s):
   return content_students
 
 print(findContentChildren([1,2,2], [2,3]))
+
+
+def findContentChildren( g, s):
+        """
+        :type g: List[int]
+        :type s: List[int]
+        :rtype: int
+        """
+        # WHAT WAS THE THOUGHT PROCESS BEHIND SORTING IT, LET US BOIL IT DOWN TO ITS MOST BASIC TRUTHS of this problem
+
+        # WE NEED TO COMPARE EVERY COOKIE SIZE TO EVERY STUDENT TO SEE IF WE CAN MAKE THEM CONTENT. 
+        #THIS BRUTE FORCE APPROACH WILL TAKE O(N^2) TIME BECAUSE FOR EVERY STUDENT YOU ARE CHECKING EVERY COOKIE SIZE
+
+        # BUT WHAT IF THERE WAS A BETTER SYSTEM TO FIND CONTENT STUDENTS IN THE NUMBER OF COOKIES YOU HAVE TO CHECK BEFORE FINDING A MINIMUM COOKIE SIZE
+
+        # SO THE NEXT THOUGHT THAT COMES INTO THINKING ABOUT THIS PROBLEM IS THAT YOU KNOW HAS A STUDENTS GREED FACTOR GETS LARGER THE COOKIE 
+        # SIZE TO SATISFY THE STUDENT GETS LARGER THEREFORE IF YOU SORT BOTH OF THEM BECAUSE YOU KNOW HAS THE STUDENTS GREED FACTOR GROW YOU DONT NEED TO HAVE POINTERS IN THE ARRAY GOING FORWARDS AND BACK
+        # AND ALSO THOSE COOKIES WOULD HAVE TO GO ANYWAY BECAUSE ONE COOKIE PER STUDENT I MEAN EVEN IF YOU IGNORED THE FACT THAT THEY GROW TOGETHER IF SORTED IF YOU DIDNT SORT THEM YOU WOULD HAVE TO START FROM THE BEGINNING OF THE ARRAY EVERYTIME TO SEE IF THERE IS A HIGH ENOUGH VALUE THAT SATISFYS THE CURRENT STUDENTS GREED LEVEL SO IF YOU SORT YOU AT LEAST KNOW THAT IF THE STUDENTS GREED FACTOR GROWS YOUR ONLY CHANCE IS TO ALSO LOOK FORWARD IN THE ARRAY THEREFOREE ONE POINTER
+        g = sorted(g)
+        s = sorted(s)
+        gi, si = 0, 0
+        while gi < len(g) and si < len(s):
+            if g[gi] <= s[si]:
+                gi += 1
+                si += 1
+            else:
+                si += 1
+        return gi
+
+        '''SO WHAT ARE THE KEY TAKEAWAYS FROM THIS O(N LOG N) findContentChildren problem that as a student's 
+        greed factor grows the minimum size of the cookie in order to satisfy them has to  grow therefore
+        if you sort both arrs you can ensure that order. The benefit of ensuring this order is that you dont have to keep
+        checking the whole array to find a cookie size to satisdy a greedier kid and vice versa'''
+
+        # BOIL IT DOWN TO ITS MOST BASIC TRUTHS
