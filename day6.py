@@ -70,7 +70,6 @@ def lengthOfLongestSubstring(s):
 
           backtracing_index = current_index # Set the index to iterate back to find the previous occurence of the repeated element, why?
 
-          # DO WE EVEN NEED THE FLAG?
           while backtracing_index >= 0: # keeping track of when we are done backtracing to find the previous occurence of the last repeated element
 
             backtracing_index -= 1 # Backtrace
@@ -85,3 +84,44 @@ def lengthOfLongestSubstring(s):
 
     
 print(lengthOfLongestSubstring("pwwkew"))
+
+
+
+
+def minAddToMakeValid(S):
+    """
+    :type S: str
+    :rtype: int
+    """
+    missing_counter = 0
+    parenthesis_freq = {}
+    opened = "("
+    closed = ")"
+
+    for index, parenthesis in enumerate(S):
+      if parenthesis not in parenthesis_freq:
+        parenthesis_freq[parenthesis] = [1, index]
+      # else:
+      #   parenthesis_freq[parenthesis] = parenthesis_freq[parenthesis][0] += 1
+
+    # for parenthesis in S:
+
+    #   # Resolve with closed parenthesis
+    #   if parenthesis == opened: 
+    #     if parenthesis_freq[closed] > 0:
+    #       parenthesis_freq[closed] -= 1
+
+    #     else:
+    #       missing_counter += 1
+
+    #   elif parenthesis == closed:
+    #     if parenthesis_freq[opened] > 0:
+    #       parenthesis_freq[opened] -= 1
+
+    #     else:
+    #       missing_counter += 1
+
+    return parenthesis_freq
+
+
+print(minAddToMakeValid("()))(("))
