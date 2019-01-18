@@ -125,3 +125,22 @@ def minAddToMakeValid(S):
 
 
 print(minAddToMakeValid("()))(("))
+
+
+
+# USING STACK SOLUTION  
+# def minAddToMakeValid(self, S):
+#         """
+#         :type S: str
+#         :rtype: int
+#         """
+#         stack = []
+#         for parenthesis in S:
+#             if parenthesis == "(":
+#                 stack.append(parenthesis)
+#             else:
+#                 if stack and stack[-1] == "(":
+#                     stack.pop()
+#                 else:
+#                     stack.append(parenthesis)
+#         return len(stack)
