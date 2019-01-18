@@ -94,38 +94,31 @@ def minAddToMakeValid(S):
     :rtype: int
     """
     missing_counter = 0
-    parenthesis_freq = {}
     opened = "("
     closed = ")"
+    opened_amount = 0
+    closed_amount = 0
 
     for index, parenthesis in enumerate(S):
-      if parenthesis not in parenthesis_freq:
-        parenthesis_freq[parenthesis] = [1, index]
-      # else:
-      #   parenthesis_freq[parenthesis] = parenthesis_freq[parenthesis][0] += 1
+      if parenthesis == opened:
+        opened_amount += 1 # INCREASE THE OPENED PARENTHESIS COUNT
 
-    # for parenthesis in S:
+      elif parenthesis == closed:
+        closed_amount += 1
 
-    #   # Resolve with closed parenthesis
-    #   if parenthesis == opened: 
-    #     if parenthesis_freq[closed] > 0:
-    #       parenthesis_freq[closed] -= 1
+        if opened_amount > 0:
 
-    #     else:
-    #       missing_counter += 1
+          # meaning pair has been resolved
+          opened_amount -= 1
+          closed_amount -= 1
 
-    #   elif parenthesis == closed:
-    #     if parenthesis_freq[opened] > 0:
-    #       parenthesis_freq[opened] -= 1
+        else:
+          missing_counter += 1
 
-    #     else:
-    #       missing_counter += 1
-
-    return parenthesis_freq
+    return missing_counter + opened_amount # HAVE TO MAKE SURE FIRST THAT THERE WAS NO CHANCE THAT THE OPENED BRACKETS WOULD BE CLOSED IF YOU MADE IT TO END OF FOR LOOP THEN YOU HAVE THE AMOUNT OF UNRESOLVED OPEN PARENS AND THE MISSING PARENS THEREFORE YOU ADD THE MISSING OPEN ONES TO THE COUNTER
 
 
-print(minAddToMakeValid("()))(("))
-
+        
 
 
 # USING STACK SOLUTION  
