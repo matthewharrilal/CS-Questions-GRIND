@@ -137,3 +137,43 @@ def minAddToMakeValid(S):
 #                 else:
 #                     stack.append(parenthesis)
 #         return len(stack)
+
+
+
+def twoSum(self, numbers, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        # Input: numbers = [2,7,11,15], target = 9
+        # Output: [0,1]
+        # Explanation: The sum of 2 and 7 is 9. 
+        
+        # BINARY SEARCH TO LOOK FOR THE COMPLIMENT
+        
+       
+            
+        if len(numbers) == 0:
+            return "No compliment"
+        
+        
+        for num in numbers:
+            compliment = target - num
+            
+            median = len(numbers) // 2
+            print(numbers, median, compliment)
+            
+            
+            if compliment == numbers[median]: # RIGHT HERE IS THE ERROR
+                return compliment
+            
+            # Meaning if the compliment is in the right half
+            elif compliment > numbers[median]:
+             # print(self.twoSum(numbers, compliment))
+             return(self.twoSum(numbers[median + 1:], target))
+                
+            else:
+             # print(self.twoSum(numbers[:median], compliment))
+             return(self.twoSum(numbers[:median], target))
+        return compliment
