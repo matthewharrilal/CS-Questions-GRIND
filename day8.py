@@ -39,6 +39,22 @@ def selection_sort(unsorted_arr):
 #     return A
 
 
-print(selection_sort([29,10,14,37,14]))
+# print(selection_sort([29,10,14,37,14]))
 
 
+# [29,10,14,37,14
+
+def insertion_sort(unsorted_arr):
+    for index in range(1, len(unsorted_arr)): # For every element compare to the element behind it
+        current_num = unsorted_arr[index]
+        backtracing_index = index - 1 # Marks the element previous
+        
+        while current_num < unsorted_arr[backtracing_index]: # while the current element is less than the elements before it
+            unsorted_arr[backtracing_index + 1] = unsorted_arr[backtracing_index] 
+            backtracing_index -= 1
+        unsorted_arr[backtracing_index+1] = current_num 
+    return unsorted_arr
+    # It is only swapping pairs
+
+print(insertion_sort([3,38,44,5,47,15,36,26,27,2,46,4,19,50,48]))
+                
