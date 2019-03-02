@@ -17,6 +17,9 @@ class Solution(object):
         # Stop when the node we enter becomes null
         if root is None:
             return 0 
+
+
+        # Have to ask yourself what is the condition that will make this break or essentially when it needs to stop
         
         # The second base case is if you reach a leaf node
         if root.left is None and root.right is None:
