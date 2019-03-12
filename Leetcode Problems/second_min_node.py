@@ -10,15 +10,24 @@ class Solution(object):
     def depthFirstSearch(self, root): # Result will return the smallest value in the tree ... aka the first time it visits
         done = False
         stack = []
+        unique_values = set()
         
         while not done:
             while root is not None:
+                print(root.val)
                 stack.append(root)
-                
                 root = root.left
                 
-            current_node = stack.pop(len(stack) - 1) # Lowest element ... first time we visit
-            return current_node.val
+            if len(stack) == 0:
+                return unique_values
+                
+            current_node = stack.pop(len(stack) - 1) # Doesn't gurantee lowest element not a binary search tree
+            unique_values.add(current_node.val)
+            
+            root = current_node.right
+            
+        return unique_values
+            
         
         
     def findSecondMinimumValue(self, root):
@@ -27,22 +36,12 @@ class Solution(object):
         :rtype: int
         """
         
-        if root.left is None and root.right is None:
-            return - 1 # If the root node is only present
+        unique_values = self.depthFirstSearch(root)
+        print("Unique Values", unique_values)
         
-        if root.left:
-            left_lowest = self.depthFirstSearch(root.left)
-        else:
-            left_lowest = -1
-            
-            
-        if root.right:
-            right_lowest = self.depthFirstSearch(root.right)
-        else:
-            right_lowest = -1
+        removed_element = unique_values.remove(min(unique_values)) # If the set is empty after meaning there was no second smaller value
         
-        if left_lowest == right_lowest:
-            print("Special Case ", left_lowest, right_lowest)
+        if len(unique_values) == 0:
             return -1
-            
-        return max(left_lowest, right_lowest)
+        
+        return min(unique_values)
