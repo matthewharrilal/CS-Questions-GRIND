@@ -5,6 +5,10 @@
 #         self.left = None
 #         self.right = None
 
+
+# [10,5,15,null,null,6,20]
+
+
 class Solution(object):
     def isValidBST(self, root):
         """
