@@ -97,9 +97,10 @@ class DoublyLinkedList(object):
 
     def convert(self, bst_tree):
         sorted_data = bst_tree.in_order_traversal()
-        print(sorted_data)
 
-        previous_node = ListNode(sorted_data[0]) # Configure the first node
+        self.head = ListNode(sorted_data[0]) # Configure the first node
+
+        previous_node = self.head
 
         previous_node.previous_pointer = None
 
@@ -109,11 +110,11 @@ class DoublyLinkedList(object):
             current_node.previous_pointer = previous_node
             
 
-            if previous_node.previous_pointer is None:
-                print("Start")
+            # if previous_node.previous_pointer is None:
+            #     # print("Start")
 
-            else:
-                print(previous_node.previous_pointer.data, previous_node.data,  previous_node.next_pointer.data)
+            # else:
+            #     # print(previous_node.previous_pointer.data, previous_node.data,  previous_node.next_pointer.data)
 
             previous_node = current_node
             
@@ -123,34 +124,93 @@ class DoublyLinkedList(object):
 
         current_node.next_pointer = None # Setting last pointer to non e
 
-        return current_node
+        return self.head
 
 
-def merge_doublies(first_list, second_list):
-    '''Merges two sorted doubly linked lists'''
+# def merge_doublies(first_list, second_list): # This would actually take in the firt lists root and the second lists root
+#     '''Merges two sorted doubly linked lists'''
 
-    first_index, second_index = 0, 0
+#     first_index, second_index = 0, 0
 
-    output = []
+#     output = []
+#     longer_list = None
 
-    while first_index < len(first_list) and second_index < len(second_list):
-        first_item, second_item = first_list[first_index], second_list[second_index]
+#     while first_index < len(first_list) and second_index < len(second_list):
+#         first_item, second_item = first_list[first_index], second_list[second_index]
 
-        if first_item <= second_item:
-            output.append(first_item)
-            first_index += 1
+#         if first_item <= second_item:
+#             output.append(first_item)
+#             first_index += 1
+
+#         else:
+#             output.append(second_item)
+#             second_index += 1
+
+#     if first_index < (len(first_list) - 1):
+#         longer_list = first_list
+
+#     elif second_index < (len(second_list) - 1):
+#         longer_list = second_list
+
+#     if longer_list is not None:
+#         for item in longer_list:
+#             output.append(item)
+
+#     return output
+
+def merge_doublies(first_root, second_root):
+    resulting_list = DoublyLinkedList()
+    previous_node = None
+
+    # Initial configuration of resulting lists head
+    if first_root.data <= second_root.data:
+        resulting_list.head = ListNode(first_root.data)
+        first_root = first_root.next_pointer # bump the first node
+
+    else:
+        resulting_list.head = ListNode(second_root.data)
+        second_root = second_root.next_pointer # bump the second node
+
+    # After this the head has been established make a copy and work with it
+
+    current_node = resulting_list.head
+    current_node.previous_pointer = previous_node
+    
+    while first_root is not None and second_root is not None:
+
+        if first_root.data <= second_root.data:
+            previous_node = first_root # Set previous node before we bump first counter
+            current_node.next_pointer = first_root
+            first_root = first_root.next_pointer
 
         else:
-            output.append(second_item)
-            second_index += 1
+            previous_node = second_root
+            current_node.next_pointer = second_root
+            second_root = second_root.next_pointer
+        
+        current_node = current_node.next_pointer
 
-    return output
+        print(current_node.data)
+
+    return resulting_list
 
 
-items = [3,2,4,1,5]
+
+
+
+items = [7, 5, 2 , 9 , 12]
+
+second_items = [3, 10, 8, 11]
+
 
 tree = BinarySearchTree(items)
 
-doublyLinkedList = DoublyLinkedList(tree)
+second_tree = BinarySearchTree(second_items)
 
-# print(tree.in_order_traversal())
+doublyLinkedList = DoublyLinkedList()
+
+second_list = DoublyLinkedList()
+
+first_root, second_root = doublyLinkedList.convert(tree), second_list.convert(second_tree)
+
+print(merge_doublies(first_root, second_root))
