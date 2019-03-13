@@ -50,7 +50,6 @@ class BinarySearchTree(object):
                 
                 parent_node = current_node
                 current_node = current_node.left
-                print("Coming in here ", parent_node.data)
 
             else: # If item is bigger than root then traverse right
                 parent_node = current_node
@@ -83,22 +82,26 @@ class BinarySearchTree(object):
 
         # return output
 
-# class ListNode(object):
-#     def __init__(self, data):
-#         self.data = data
-#         self.previous_pointer = None
-#         self.next_pointer = None
+class ListNode(object):
+    def __init__(self, data):
+        self.data = data
+        self.previous_pointer = None
+        self.next_pointer = None
 
-# class DoublyLinkedList(object):
-#     def __init__(self, bst_iterable=None):
-#         self.head = None
-#         self.size = 0
-#         if bst_iterable is not None:
-#             for 
+class DoublyLinkedList(object):
+    def __init__(self, bst_tree=None):
+        self.head = None
+        self.size = 0
+        if bst_tree is not None:
+            self.convert(bst_tree) # Converts bst tree to doubly linked list
+
+    def convert(self, bst_tree):
 
 
 items = [45, 23, 90, 15, 30, 60, 100]
 
 tree = BinarySearchTree(items)
 
-print(tree.in_order_traversal())
+doublyLinkedList = DoublyLinkedList(tree)
+
+# print(tree.in_order_traversal())
