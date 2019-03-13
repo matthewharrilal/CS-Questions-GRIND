@@ -96,7 +96,7 @@ class DoublyLinkedList(object):
             self.convert(bst_tree) # Converts bst tree to doubly linked list
 
     def convert(self, bst_tree):
-        sorted_data = bst_tree.in_order_traversal()
+        sorted_data = bst_tree.in_order_traversal() # Returns a sorted array of data contained inside the bst tree
 
         self.head = ListNode(sorted_data[0]) # Configure the first node
 
@@ -186,6 +186,12 @@ def printItems(resulting_list):
 
         current_node = current_node.next_pointer
 
+
+def doubly_to_bst(resulting_list, bst=None, start=None, end=None):
+    if bst is None and start is None and end is None:
+        bst = BinarySearchTree()
+        start = 0
+        end = len(resulting_list) - 1
 
 
 
