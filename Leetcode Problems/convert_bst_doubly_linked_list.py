@@ -126,6 +126,27 @@ class DoublyLinkedList(object):
         return current_node
 
 
+def merge_doublies(first_list, second_list):
+    '''Merges two sorted doubly linked lists'''
+
+    first_index, second_index = 0, 0
+
+    output = []
+
+    while first_index < len(first_list) and second_index < len(second_list):
+        first_item, second_item = first_list[first_index], second_list[second_index]
+
+        if first_item <= second_item:
+            output.append(first_item)
+            first_index += 1
+
+        else:
+            output.append(second_item)
+            second_index += 1
+
+    return output
+
+
 items = [3,2,4,1,5]
 
 tree = BinarySearchTree(items)
