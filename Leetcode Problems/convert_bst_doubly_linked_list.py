@@ -111,7 +111,7 @@ class DoublyLinkedList(object):
             
 
             # if previous_node.previous_pointer is None:
-            #     # print("Start")
+                # print("Start")
 
             # else:
             #     # print(previous_node.previous_pointer.data, previous_node.data,  previous_node.next_pointer.data)
@@ -127,40 +127,10 @@ class DoublyLinkedList(object):
         return self.head
 
 
-# def merge_doublies(first_list, second_list): # This would actually take in the firt lists root and the second lists root
-#     '''Merges two sorted doubly linked lists'''
-
-#     first_index, second_index = 0, 0
-
-#     output = []
-#     longer_list = None
-
-#     while first_index < len(first_list) and second_index < len(second_list):
-#         first_item, second_item = first_list[first_index], second_list[second_index]
-
-#         if first_item <= second_item:
-#             output.append(first_item)
-#             first_index += 1
-
-#         else:
-#             output.append(second_item)
-#             second_index += 1
-
-#     if first_index < (len(first_list) - 1):
-#         longer_list = first_list
-
-#     elif second_index < (len(second_list) - 1):
-#         longer_list = second_list
-
-#     if longer_list is not None:
-#         for item in longer_list:
-#             output.append(item)
-
-#     return output
-
 def merge_doublies(first_root, second_root):
     resulting_list = DoublyLinkedList()
     previous_node = None
+    remaining_root = None
 
     # Initial configuration of resulting lists head
     if first_root.data <= second_root.data:
@@ -187,13 +157,34 @@ def merge_doublies(first_root, second_root):
             previous_node = second_root
             current_node.next_pointer = second_root
             second_root = second_root.next_pointer
+
+        if current_node.previous_pointer is None:
+            print("Start")
+
+        else:
+            print(current_node.previous_pointer.data, current_node.data,  current_node.next_pointer.data)
         
         current_node = current_node.next_pointer
 
-        print(current_node.data)
+    
+    remaining_root = first_root if first_root is not None else second_root
 
+    if remaining_root is not None:
+        while remaining_root is not None:
+            current_node.next_pointer = remaining_root
+
+            remaining_root = remaining_root.next_pointer
+
+    
     return resulting_list
 
+def printItems(resulting_list):
+    current_node = resulting_list.head
+
+    while current_node is not None:
+        print(current_node.data)
+
+        current_node = current_node.next_pointer
 
 
 
@@ -213,4 +204,5 @@ second_list = DoublyLinkedList()
 
 first_root, second_root = doublyLinkedList.convert(tree), second_list.convert(second_tree)
 
-print(merge_doublies(first_root, second_root))
+resulting_list = merge_doublies(first_root, second_root)
+
