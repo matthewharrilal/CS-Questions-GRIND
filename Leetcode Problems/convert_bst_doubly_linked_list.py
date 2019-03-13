@@ -193,6 +193,34 @@ def doubly_to_bst(resulting_list, bst=None, start=None, end=None):
         start = 0
         end = len(resulting_list) - 1
 
+    if start > end: # Base case to end recursion
+        return
+
+    root_index = (start + end) // 2
+
+    root_data = resulting_list[root_index]
+
+    root = BinaryTreeNode(root_data)
+
+    # Now that we have found the root node we need to calculate the left and right child
+    left_child_index = doubly_to_bst(resulting_list, start, root_index - 1)
+    right_child_index = doubly_to_bst(resulting_list, root_index + 1, end) 
+
+    left_child = resulting_list[left_child_index]
+    right_child = resulting_list[right_child_index]
+
+    bst.insert(root) # Keep adding subtrees by accurately inserting root node
+
+    # Left and right child will always be attached 
+    bst.left = left_child
+    bst.right = right_child
+    
+    return root
+
+
+
+
+
 
 
 items = [7, 5, 2 , 9 , 12]
@@ -211,4 +239,7 @@ second_list = DoublyLinkedList()
 first_root, second_root = doublyLinkedList.convert(tree), second_list.convert(second_tree)
 
 resulting_list = merge_doublies(first_root, second_root)
+
+
+print(doubly_to_bst(resulting_list))
 
