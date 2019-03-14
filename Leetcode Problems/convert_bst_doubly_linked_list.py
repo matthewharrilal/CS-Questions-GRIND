@@ -230,7 +230,7 @@ second_items = [3, 10, 8, 11]
 
 tree = BinarySearchTree(items)
 
-second_tree = BinarySearchTree(second_items)
+second_tree = BinarySearchTree(second_items) # Is it balanced though?
 
 doublyLinkedList = DoublyLinkedList()
 
