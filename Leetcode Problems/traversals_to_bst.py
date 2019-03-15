@@ -18,33 +18,47 @@ class Solution(object):
             end = len(inorder) - 1
             root_position = 0
             
+            
         root = preorder[root_position] # Base root is the first element in our preorder sequence
+        print("")
         print("ROOT ", root)
+        
+      
         
         # Locate root inside our inorder sequence to partition left and right subtrees
         
-        root_index = inorder.index(root)
+        inorder_root_index = inorder.index(root)
         
-        if (root_index - start) < 1:
-            print("Hit base case for the left")
-            return 
+        # For the left
+        if (inorder_root_index - start) == 0:
+            
+            print("Hit leaf at value ", root)
+            root_position += 1
+            return root_position
         
-        if (end - root_index) < 1:
-            print("Hit base case for the right")
+        # For the right
+        if (end - inorder_root_index) == 0:
+            
+            # TODO : Set left child to none
+            print("Hit leaf at value ", root)
             return
         
+        
         # Find Left Subtree Values
-        for index in range(start, root_index):
+        for index in range(start, inorder_root_index):
             left_value = inorder[index]
-            print("LEFT SUBTREE VALUE ", left_value)
-            
-        # Build left subtree first with lower and upper bound which we calculate from the next element in preorder
-        self.buildTree(preorder, inorder, 0, root_index, root_position + 1)
+            print("LEFT SUBTREE VALUE ", left_value, root)
+        
+        # Then update root position so we know which element to look at next in preorder
+        root_position = self.buildTree(preorder, inorder, start, inorder_root_index, root_position + 1)
+        print("")
         
         # Find Right Subtree Values
-        for index in range(root_index + 1, end  + 1):
+        for index in range(inorder_root_index + 1, end  + 1):
             right_value = inorder[index]
-            print("RIGHT SUBTREE VALUE ", right_value)
+            print("RIGHT SUBTREE VALUE ", right_value, root)
+        
+        self.buildTree(preorder, inorder, inorder_root_index + 1, end, root_position)
+        
             
-        self.buildTree(preorder, inorder, root_index + 1, len(inorder) - 1, root_position + 1)
-            
+        
