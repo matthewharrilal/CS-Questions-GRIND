@@ -24,12 +24,14 @@ class Graph(object):
         vertex = self.vertex
 
         adjacency_list = []
+        index_to_element, counter = {}, 0
 
         queue = []
         level = []
 
         queue.append(vertex)
-        print(len(queue))
+        index_to_element[counter] = vertex.data
+        counter += 1
 
         while len(queue) > 0:  # Meaning there are vertices left to process
             for neighbor in vertex.neighbors:
@@ -37,7 +39,6 @@ class Graph(object):
 
                 # Only add for processing if hasnt been visited already or not in the queeu
                 if neighbor.visited is False and neighbor not in queue:
-                    # print("Appending neighbor value {} from vertex value {} ".format(neighbor.data, vertex.data))
                     queue.append(neighbor)
 
             # Once you have appended a vertex's list of neighbors we then want to append the level
@@ -45,16 +46,16 @@ class Graph(object):
             vertex.visited = True  # Set to true because you have added neighbor nodes
             level = []  # Clear level for the next vertice's neighbors
 
-            
-
             # What vertex to go to next
             print("For the element {} -> adj list {} ".format(vertex.data, adjacency_list))
             queue.pop(0)
 
             if len(queue) == 0:
-                return adjacency_list
+                return adjacency_list, index_to_element
 
             vertex = queue[0]  # Visit the next vertex need to be processed
+            index_to_element[counter] = vertex.data
+            counter += 1
 
         # return adjacency_list
 
