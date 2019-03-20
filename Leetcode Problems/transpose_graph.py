@@ -45,13 +45,18 @@ class Graph(object):
             vertex.visited = True  # Set to true because you have added neighbor nodes
             level = []  # Clear level for the next vertice's neighbors
 
+            
+
             # What vertex to go to next
-            print("This is the adj list ", adjacency_list)
+            print("For the element {} -> adj list {} ".format(vertex.data, adjacency_list))
             queue.pop(0)
+
+            if len(queue) == 0:
+                return adjacency_list
 
             vertex = queue[0]  # Visit the next vertex need to be processed
 
-        return adjacency_list
+        # return adjacency_list
 
 first_vertex = Vertex(1)  # First Vertex has a connection to 2 and 4
 second_vertex = Vertex(2)
@@ -78,5 +83,4 @@ graph = Graph(first_vertex)  # Hopefully first vertex contains reference to othe
 
 print(graph.createdAdjacencyList())
 
-
-
+# Now that we have the adjacency list now what
