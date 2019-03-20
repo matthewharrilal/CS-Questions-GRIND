@@ -58,24 +58,32 @@ class Graph(object):
 
         # return adjacency_list
 
+
+    def transpose_graph(self, adjacency_list):
+        '''With the given adjacency list reverse the pointers resulting in a full transposal'''
+        pass
+
+
+
 first_vertex = Vertex(1)  # First Vertex has a connection to 2 and 4
 second_vertex = Vertex(2)
 third_vertex = Vertex(3)
 fourth_vertex = Vertex(4)
+fifth_vertex = Vertex(5)
 
 
 # Space complexity O(2E) where E represents the edges since we are using an undirected graph we consume twice the space when creating these edges 
 add_edge(first_vertex, second_vertex)
-add_edge(first_vertex, fourth_vertex)
+# add_edge(first_vertex, fourth_vertex)
 
-add_edge(second_vertex, first_vertex)
+# add_edge(second_vertex, first_vertex)
 add_edge(second_vertex, third_vertex)
 
-add_edge(third_vertex, second_vertex)
+add_edge(third_vertex, first_vertex)
 add_edge(third_vertex, fourth_vertex)
 
-add_edge(fourth_vertex, first_vertex)
-add_edge(fourth_vertex, third_vertex)
+add_edge(fourth_vertex, fifth_vertex)
+add_edge(fifth_vertex, first_vertex)
 
 
 
