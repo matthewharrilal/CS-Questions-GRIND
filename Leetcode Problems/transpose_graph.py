@@ -59,7 +59,7 @@ third_vertex = Vertex(3)
 fourth_vertex = Vertex(4)
 
 
-
+# Space complexity O(2E) where E represents the edges since we are using an undirected graph we consume twice the space when creating these edges 
 add_edge(first_vertex, second_vertex)
 add_edge(first_vertex, fourth_vertex)
 
