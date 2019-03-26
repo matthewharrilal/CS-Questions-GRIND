@@ -42,6 +42,26 @@ class Solution(object):
         
 
             
+
+class Solution(object):
+    def findRedundantConnection(self, edges):
+        """
+        :type edges: List[List[int]]
+        :rtype: List[int]
+        """
+        adjacency_list = []
+        
+        for edge_index in range(len(edges)):
+            level = []
+            start_vertex, end_vertex = edges[edge_index][0], edges[edge_index][1]
+            adjacency_length = len(adjacency_list)
             
+            while adjacency_length <= (start_vertex - 1):
+                
+                adjacency_list.append([])
+                
+                adjacency_length += 1
+        
+        return adjacency_list
         
         

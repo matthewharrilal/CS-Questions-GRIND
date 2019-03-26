@@ -25,12 +25,14 @@ class Graph(object):
 
         adjacency_list = []
         index_to_element, counter = {}, 0
+        element_to_index = {}
 
         queue = []
         level = []
 
         queue.append(vertex)
         index_to_element[counter] = vertex.data
+        element_to_index[vertex.data] = counter
         counter += 1
 
         while len(queue) > 0:  # Meaning there are vertices left to process
@@ -47,22 +49,62 @@ class Graph(object):
             level = []  # Clear level for the next vertice's neighbors
 
             # What vertex to go to next
-            print("For the element {} -> adj list {} ".format(vertex.data, adjacency_list))
+            # print("For the element {} -> adj list {} ".format(vertex.data, adjacency_list))
             queue.pop(0)
 
             if len(queue) == 0:
-                return adjacency_list, index_to_element
+                # print("This is the element to index array ", element_to_index)
+                # print("This is the index to element array ", index_to_element)
+                return adjacency_list, index_to_element, element_to_index
 
             vertex = queue[0]  # Visit the next vertex need to be processed
             index_to_element[counter] = vertex.data
+            element_to_index[vertex.data] = counter
             counter += 1
 
         # return adjacency_list
 
 
-    def transpose_graph(self, adjacency_list):
-        '''With the given adjacency list reverse the pointers resulting in a full transposal'''
-        pass
+    # def transpose_graph(self, adjacency_list, index_to_element, element_to_index):
+    #     '''With the given adjacency list reverse the pointers resulting in a full transposal'''
+    #     for element_pointing_index, neighbors in enumerate(adjacency_list):
+    #         # With this index we should be able to get the data that corresponds to the index
+
+    #         # Example 0 should point to 1
+    #         pointing_element = index_to_element[element_pointing_index] # This part is good
+            
+    #     #     print(neighbors)
+
+    #         for index, neighbor in enumerate(neighbors):
+    #             # First remove the neighbor
+    #             print("")
+    #             popped_neighbor = neighbors.pop(index)
+    #             # print("Popped neighbor ", popped_neighbor)
+
+    #             # Then add the pointing element to the popped neighbor's list of neigbors
+    #             neighbor_index = element_to_index[popped_neighbor]
+
+
+    #             adjacency_list[neighbor_index].append(pointing_element)
+    #             print("For element {} there neighbors are {}".format(popped_neighbor, adjacency_list[neighbor_index]))
+
+    #     return adjacency_list
+
+
+    def transpose_graph(self, adjacency_list, index_to_element, element_to_index, incrementing_counter=None, vertex=None):
+
+        # TODO What is being auto updated?
+        if incrementing_counter is None and vertex is None:
+            incrementing_counter = 0
+            vertex = self.vertex
+
+
+        # TODO What is the base case  # If all the vertices in a list of neighbors have been visited
+        
+
+
+
+        # What is the functionality to perform dfs
 
 
 
@@ -90,6 +132,10 @@ add_edge(fifth_vertex, first_vertex)
 
 graph = Graph(first_vertex)  # Hopefully first vertex contains reference to other vertices
 
-print(graph.createdAdjacencyList())
+adjacency_list, index_to_element, element_to_index = graph.createdAdjacencyList()
+print(adjacency_list)
+print(index_to_element)
+
+print(graph.transpose_graph(adjacency_list, index_to_element, element_to_index))
 
 # Now that we have the adjacency list now what
