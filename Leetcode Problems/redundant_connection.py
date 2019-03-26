@@ -1,67 +1,31 @@
 class Solution(object):
     
-    # A utility function to do union of two subsets 
-    def union(self,parent,u,v): 
-        u_set = self.findParentSubset(parent, u) 
-        v_set = self.findParentSubset(parent, v) 
-        parent[u_set] = v_set 
+      # Size of graph is proportional to how many edges there are O(V + E) ~ O(E)
     
-    def findParentSubset(self, parent, vertex):
-        if parent[vertex] == -1: 
-            return vertex
+    def find(self, vertex, parent):
+        if parent[vertex] == 0: # Meaning that we have found the representative element of the set
+            return vertex # Following the path until we reach the representative element
         
-        if parent[vertex]!= -1: 
-            # print("In here")
-            return self.findParentSubset(parent,parent[vertex]) 
-            
+        return self.find(parent[vertex], parent)  # Have to find the representative element of the parent element
+        
+    def union(self, first_set, second_set, parent):
+        parent[first_set] = second_set  # Make the second element the representative element aka the parent element of the first element
+        
+        
     
     def findRedundantConnection(self, edges):
         """
         :type edges: List[List[int]]
         :rtype: List[int]
         """
+        parent = [0] * len(edges)
         
-        parent = [-1] * len(edges) # Single element sets no edges between vertices yet
-        
-        for pair in edges:
-            u,v = pair[0], pair[1]
+        for edge in edges:
+            vertex_one, vertex_two = edge[0], edge[1]
+            first_set, second_set = self.find(vertex_one - 1, parent), self.find(vertex_two - 1, parent)
             
-            # Need -1 of vertices because dealing with list indices
-            u_subset = self.findParentSubset(parent, u - 1)
-            v_subset = self.findParentSubset(parent, v - 1)
-            
-            # if u == 1:
-            #     print("SUbset that 1 belongs to ", u_subset)
-            
-            # If elements lie in the same subset
-            if u_subset == v_subset:
-                return [u,v]
-            
-            else: # Create edge between two subsets
-                self.union(parent, u - 1, v - 1)
-        
-
-            
-
-class Solution(object):
-    def findRedundantConnection(self, edges):
-        """
-        :type edges: List[List[int]]
-        :rtype: List[int]
-        """
-        adjacency_list = []
-        
-        for edge_index in range(len(edges)):
-            level = []
-            start_vertex, end_vertex = edges[edge_index][0], edges[edge_index][1]
-            adjacency_length = len(adjacency_list)
-            
-            while adjacency_length <= (start_vertex - 1):
+            if first_set != second_set:
+                self.union(first_set, second_set, parent)
                 
-                adjacency_list.append([])
-                
-                adjacency_length += 1
-        
-        return adjacency_list
-        
-        
+            else:
+                return [vertex_one, vertex_two]
