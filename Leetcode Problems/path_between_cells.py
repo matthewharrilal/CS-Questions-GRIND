@@ -31,7 +31,10 @@ def find_valid_pathway(matrix):
             if current_element == 2:  # Meaning we found the destination
                 destination = (row_index, column_index)
 
-    return source, destination
+    
+    # Now that we are able to retrieve the source point we have to traverse through our empty cells which are the (3)'s
+
+    # Outline our base cases but what is the general solution ... we know how to navigate through our matrix through up down left and right
 
 matrix = [[0,3,2], [3,3,0], [1,3,0]]
 print(find_valid_pathway(matrix))
