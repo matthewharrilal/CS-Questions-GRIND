@@ -28,7 +28,7 @@ class Solution(object):
             
             
             # We know that the left child is null and right is null we then hit a leaf node
-            if current_node.right is None:
+            if current_node.right is None and current_node.left is None:
                 
                 root_sequence.append(current_node.val)
             
