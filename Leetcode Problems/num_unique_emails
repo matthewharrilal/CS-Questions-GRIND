@@ -1,0 +1,44 @@
+class Solution(object):
+    def numUniqueEmails(self, emails):
+        """
+        :type emails: List[str]
+        :rtype: int
+        """
+        
+        
+        current_letter_index = 0
+        resulting_string = ""
+        email_string = ""
+        
+        email_set = set()
+        
+        # Does this account for an email that doesn't come with an @ symbol ?
+        
+        
+        # For each email in the list of emails
+        for email in emails:
+            # The current letter of the email we are currently on
+            at_letter_index = email.find("@")
+            
+            # The first letter of the current email
+            current_letter = email[current_letter_index]
+            
+            while current_letter != "+" and current_letter_index != at_letter_index:
+                if current_letter != ".":
+                   
+                    resulting_string += current_letter
+                    
+                current_letter_index += 1
+                current_letter = email[current_letter_index]
+                
+                
+            
+            email_string = resulting_string + email[at_letter_index:]
+            email_set.add(email_string)
+
+            
+            resulting_string = ""
+            current_letter_index = 0
+            
+        return len(email_set)
+            
