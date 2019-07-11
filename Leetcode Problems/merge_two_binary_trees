@@ -1,3 +1,10 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
 class Solution(object):
     
     def bfs_traversal(self, tree_node):
@@ -48,4 +55,44 @@ class Solution(object):
         :rtype: TreeNode
         """
         
-        print(self.bfs_traversal(t1), self.bfs_traversal(t2))
+        first_list = self.bfs_traversal(t1)
+        second_list = self.bfs_traversal(t2)
+        
+        larger_list = first_list if len(first_list) > len(second_list) else second_list
+        smaller_list = first_list if len(second_list) >= len(first_list) else second_list
+        
+        for _ in range(len(larger_list) - len(smaller_list)):
+                       smaller_list.append(None)
+                      
+                       
+        
+        i, j = 0 , 0
+        
+        combined_list = []
+        
+        print(larger_list, smaller_list)
+        while i < len(smaller_list) and j < len(larger_list):
+            first_element, second_element = first_list[i], second_list[j]
+            
+            
+            if first_element is not None and second_element is not None:
+                sum_value = first_element + second_element
+                combined_list.append(sum_value)
+                
+            elif first_element is None and second_element is None:
+                combined_list.append(None)
+                
+            else:
+                existing_element = first_element if first_element is not None else second_element
+                combined_list.append(existing_element)
+                
+            i += 1
+            
+            j += 1
+                
+        print(combined_list)
+                
+                
+                
+        
+        
