@@ -1,0 +1,51 @@
+class Solution(object):
+    
+    def bfs_traversal(self, tree_node):
+        queue = []
+        output = []
+        if tree_node is not None:
+            queue.append(tree_node)
+            current_node = tree_node
+            output.append(tree_node.val)
+        
+        while len(queue) > 0:
+            # While there are still nodes left to traverse
+            
+            current_node = queue.pop(0)
+            # print(current_node.val)
+            
+            if current_node.left is None and current_node.right is None:
+                return output
+            
+            # Used for the traversal
+            # queue.append(current_node.left)
+            # queue.append(current_node.right)
+            
+            
+            if current_node.left is None:
+                output.append(None)
+            else:
+                output.append(current_node.left.val)
+                queue.append(current_node.left)
+                
+            if current_node.right is None:
+                output.append(None)
+                
+            else:
+                output.append(current_node.right.val)
+                
+                queue.append(current_node.right)
+            
+           
+        return output
+        
+        
+        
+    def mergeTrees(self, t1, t2):
+        """
+        :type t1: TreeNode
+        :type t2: TreeNode
+        :rtype: TreeNode
+        """
+        
+        print(self.bfs_traversal(t1), self.bfs_traversal(t2))
