@@ -1,0 +1,124 @@
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        
+        # First step is calculating the neighbors inside the matrix
+        rows = len(board)
+        
+        columns = len(board[0])
+        counter = 0
+        
+        value = None
+        
+        for row in range(rows):
+            for column in range(columns):
+                counter += 1
+                
+        if counter < len(word):
+            return False
+
+        
+        # The only purpose of these for loops is to find the first element the recursive call handles the rest
+        for row in range(rows):
+            for column in range(columns):
+                current_letter = board[row][column] 
+                
+                if current_letter == word[0]:
+                    
+                
+                    value = self.dfs(board, row, column, word, word)
+                    if value is True:
+                        
+                        
+                        return True
+                    
+                    else:
+                        print("STARTING OVERRRRRRR")
+                        print("")
+                        continue
+                    
+        return False
+    
+    def dfs(self, board, row, column, word, original_word,visited=None):
+        
+        if visited is None:
+            visited = set()
+            
+
+#           # If the current row is out of bounds
+#         if row >= len(board) or row < 0:
+#             print("Row is out of bounds row")
+#             return False
+        
+#         # If the current column is out of bounds
+#         if column >= len(board[0]) or column < 0:
+            
+#             print("Column is out of bounds")
+#             return False
+        
+        
+        
+#         if len(word) > 0 and board[row][column] == word[0] and (row, column) not in visited:
+            
+#             visited.add((row, column))
+#             print(row, column)
+#             # print("Current row -> {} and column -> {} with the word {}".format(row, column, word))
+
+#             # print("LEFT from row -> {} column -> {} with visited -> {}  ".format(row, column, visited))
+#             self.dfs(board, row, column - 1, word[1:], original_word, visited) # LEFT
+#             print("")
+#             if len(visited) == len(original_word):
+#                 return True
+            
+
+
+
+#             # print("RIGHT from row -> {} column -> {} with visited -> {}  ".format(row, column, visited))
+#             self.dfs(board, row, column + 1, word[1:],original_word, visited ) # RIGHT
+#             print("")
+#             if len(visited) == len(original_word):
+#                 return True
+
+
+#             # print("UP from row -> {} column -> {} with visited -> {} ".format(row, column, visited))
+#             self.dfs(board, row + 1, column, word[1:],original_word, visited) # UP
+#             print("")
+            
+#             if len(visited) == len(original_word):
+#                 return True
+
+
+#             # print("DOWN from row -> {} column -> {} with visited -> {} ".format(row, column, visited))
+#             self.dfs(board, row - 1, column, word[1:],original_word, visited ) # DOWN
+            
+            
+#             if len(visited) == len(original_word):
+#                 return True
+            
+            
+            # Iterate through each of the neighbors for a given character
+            for row, column in [(row, column - 1), (row, column + 1), (row + 1, column), (row - 1, column)]:
+                
+                # Checking three things if row/column is valid, if letter matches the letter we are looking for, and if we have been there already
+                if row >= 0 and row < len(board) and column >= 0 and column < len(board[0]) and board[0] == word[0] and (row, column) not in visited:
+                    
+                    print(board[row][column], row,column)
+                    visited.add((row, column))
+                    print(row, column)
+                    
+                    self.dfs(board, row, column, word[1:], original_word, visited)
+                    
+            if len(visited) == len(original_word):
+                return True
+            
+            else:
+                return False
+                    
+                
+        
+            
+            
