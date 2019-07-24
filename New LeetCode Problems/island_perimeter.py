@@ -106,3 +106,40 @@ class Solution(object):
 
 
         return total_perimeter
+
+
+
+ def bfs(self, image, row, column, newColor, initial_value):
+        
+        # Creating a set to keep track of the visited nodes
+        visited = set()
+        
+        queue = []  # Used to keep track of the nodes that we are currently travering
+        
+        
+        if image[row][column] is not None:
+            queue.append((row, column))
+            
+            
+        # While there are nodes still left to travers
+        while len(queue) > 0:
+            row, column = queue.pop(0)
+            
+            # With the current row and column enqueue its children 
+            if (0 <= row + 1 < len(image)) and (0 <= column < len(image[0])) and (row + 1, column) not in visited and image[row + 1][column] == initial_value:
+                queue.append((row + 1, column))
+            
+            if (0 <= row - 1 < len(image)) and (0 <= column < len(image[0])) and (row - 1, column) not in visited and image[row - 1][column] == initial_value:
+                queue.append((row - 1, column))
+            
+            if (0 <= row  < len(image)) and (0 <= column + 1 < len(image[0])) and (row, column + 1) not in visited and image[row][column + 1] == initial_value:
+                queue.append((row, column + 1))
+            
+            if (0 <= row < len(image)) and (0 <= column - 1 < len(image[0])) and (row, column - 1) not in visited and image[row][column - 1] == initial_value:
+                queue.append((row, column - 1))
+        
+            visited.add((row, column))
+            image[row][column] = newColor
+            
+        return image
+        
